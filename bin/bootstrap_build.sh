@@ -30,19 +30,19 @@
 set -euxo pipefail
 
 # Install non-java dependencies:
-sudo apt-get update
-sudo apt-get --yes install g++ gcc git libsasl2-dev libssl-dev make maven \
-    python-dev python-setuptools libffi-dev libkrb5-dev
+yum -y update
+yum -y install gcc  gcc-c++ git cyrus-sasl cyrus-sasl-devel openssl-devel make \
+   libffi libffi-devel krb5-libs
 
 
-source /etc/lsb-release
+#source /etc/lsb-release
 
-JDK_VERSION=8
-if [[ $DISTRIB_RELEASE = 14.04 ]]
-then
-  JDK_VERSION=7
-fi
-sudo apt-get --yes install openjdk-${JDK_VERSION}-jdk openjdk-${JDK_VERSION}-source
-export JAVA_HOME=/usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
+#JDK_VERSION=8
+#if [[ $DISTRIB_RELEASE = 14.04 ]]
+#then
+#  JDK_VERSION=7
+#fi
+#sudo apt-get --yes install openjdk-${JDK_VERSION}-jdk openjdk-${JDK_VERSION}-source
+#export JAVA_HOME=/usr/lib/jvm/java-${JDK_VERSION}-openjdk-amd64
 
 ./buildall.sh -notests -so
